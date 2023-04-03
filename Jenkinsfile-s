@@ -7,7 +7,10 @@ node('workstation'){
             echo 'two'
         }
     } catch (e) {
+        stage('two') {
+
         echo 'This will run only if failed'
+    }
     }
     }
 
