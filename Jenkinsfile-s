@@ -1,52 +1,52 @@
-node('workstation'){
-    try {
-        stage('one') {
-            echo 'one'
-        }
-        stage('two') {
-            echo 'two'
-           sh 'exit 1'
-        }
-    } catch (e) {
-        stage('Decalrative:Post actions') {
-
-        echo 'This will run only if failed'
-    }
-    }
-    }
-
-//node('workstation') {
-//
-//    properties([
-//            parameters([
-//                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Environment')
-//            ])
-//    ])
-//
-//    env.SAMPLE_URL = "google.com"
+//node('workstation'){
 //    try {
-//        withCredentials([usernameColonPassword(credentialsId: 'SSH', variable: 'USERPASS')]) {
-//            stage("one") {
-//                echo "one"
-//                sh 'env'
-//                sh 'env >/tmp/env'
-//            }
+//        stage('one') {
+//            echo 'one'
 //        }
-//
-//        if ( PERSON == "RAGHU" ) {
-//            stage('two') {
-//                input(id: 'deploy_approval', message: 'Approve deployment?', ok: 'Deploy', reject: 'Cancel')
-//                echo "two"
-//            }
+//        stage('two') {
+//            echo 'two'
+//           sh 'exit 1'
 //        }
-//
 //    } catch (e) {
-//        stage('Declarative: Post Actions') {
-//            echo 'This will run only if failed'
-//        }
+//        stage('Decalrative:Post actions') {
 //
+//        echo 'This will run only if failed'
 //    }
-//
-//}
+//    }
+//    }
+
+node('workstation') {
+
+    properties([
+            parameters([
+                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Environment')
+            ])
+    ])
+
+    env.SAMPLE_URL = "google.com"
+    try {
+        withCredentials([usernameColonPassword(credentialsId: 'SSH', variable: 'USERPASS')]) {
+            stage("one") {
+                echo "one"
+                sh 'env'
+                sh 'env >/tmp/env'
+            }
+        }
+
+        if ( PERSON == "RAGHU" ) {
+            stage('two') {
+                input(id: 'deploy_approval', message: 'Approve deployment?', ok: 'Deploy', reject: 'Cancel')
+                echo "two"
+            }
+        }
+
+    } catch (e) {
+        stage('Declarative: Post Actions') {
+            echo 'This will run only if failed'
+        }
+
+    }
+
+}
 
 
