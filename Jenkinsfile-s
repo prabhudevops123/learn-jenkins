@@ -5,6 +5,7 @@ node('workstation'){
         }
         stage('two') {
             echo 'two'
+            exit 1
         }
     } catch (e) {
         stage('Decalrative:Post actions') {
